@@ -12,10 +12,10 @@
 | Platform | Branch | Config Files | Status |
 |---|---|---|---|
 | Cloudflare Pages | `main` | `wrangler.jsonc`, `open-next.config.ts` | ✅ Supported & tested |
-| Vercel | `vercel` | `vercel.json` | ⚠️ Community-maintained |
-| Netlify | `netlify` | `netlify.toml` | ⚠️ Community-maintained |
+| Vercel | `vercel` | `vercel.json` | ✅ Supported |
+| Netlify | `netlify` | `netlify.toml` | ✅ Supported |
 
-## Cloudflare Pages (Primary)
+## Cloudflare Pages (Primary — `main` branch)
 
 - Build command: `pnpm install --frozen-lockfile && pnpm run build:worker`
 - Output directory: `.open-next/assets`
@@ -23,20 +23,25 @@
 - Uses OpenNext.js to transform Next.js to Cloudflare Workers
 - All pages are SSG (static generation) with fallback disabled
 - ISR revalidation: 3600 seconds
+- OG images: Satori + Resvg (build-time, `scripts/generate-og-images.tsx`)
 
 ## Vercel (Secondary — `vercel` branch)
 
 - Build command: `pnpm run build`
 - Output directory: `.next`
 - Next.js native integration
-- Puppeteer (OG image generation) may not work in serverless runtime
+- Config file: `vercel.json`
+- OG images: Satori + Resvg (build-time, no Puppeteer required)
+- No Cloudflare-specific dependencies
 
 ## Netlify (Secondary — `netlify` branch)
 
 - Build command: `pnpm run build`
 - Output directory: `.next`
 - Framework: Next.js (auto-detected)
-- Puppeteer may not work in serverless environment
+- Config file: `netlify.toml`
+- OG images: Satori + Resvg (build-time, no Puppeteer required)
+- No Cloudflare-specific dependencies
 
 ## Contract
 
@@ -47,11 +52,13 @@
 - Next.js must stay on a non-vulnerable patched release. For the current
   Next 15.5 line, the minimum patched version is `15.5.9`.
 - Build must not depend on system Chrome libraries on serverless platforms.
+  OG images use Satori + Resvg (pure JavaScript), not Puppeteer.
 - Environment variable `NOTION_TOKEN_V2` is required at build and runtime.
 
 ## Verification
 
 - `npx pnpm@10.11.1 install --frozen-lockfile --strict-peer-dependencies`
 - Cloudflare: `pnpm run build:worker` then `pnpm preview:worker`
-- Vercel/Netlify: `npm run build`
+- Vercel/Netlify: `pnpm run build`
 - Confirm the deployment logs show Next.js `15.5.9` or newer patched release.
+- Confirm `public/og-images/` directory contains generated PNG files.

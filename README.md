@@ -4,106 +4,324 @@
 
 ![SCR-20250824-kvxf](https://github.com/user-attachments/assets/9237e080-a604-468e-b2e1-e7ec40e64b14)
 
-# Demo
-https://noxionite.leapsignal.net/
+**Demo**: https://noxionite.leapsignal.net/
 
-# 1. Overview
+---
 
-Noxionite is a powerful blog engine that turns your Notion posts into a personal blog site. It is built based on [react-notion-x](https://github.com/NotionX/react-notion-x)!
+## 1. Overview
 
-# 2. Features
+Noxionite is a powerful blog engine that turns your Notion posts into a personal blog site. Built on [react-notion-x](https://github.com/NotionX/react-notion-x) with Next.js 15, ISR, and multi-platform deployment.
 
-## 2.1. Compatibility with all Notion editing features
+---
 
-<img width="849" height="559" alt="SCR-20250824-kwfj" src="https://github.com/user-attachments/assets/b418a3a3-ad58-482d-8d1b-68978fb3870c" />
+## 2. Features
 
-<img width="812" height="502" alt="SCR-20250824-kwid" src="https://github.com/user-attachments/assets/dc743697-11ed-47aa-9843-428850ca27f6" />
+- **Full Notion compatibility** — All Notion blocks rendered beautifully
+- **Fast routing** — ISR caching, page navigation under 0.2s
+- **Infinite folder-style categories** — Unlimited nested hierarchy
+- **Auto table of contents** — Generated from Notion headings
+- **Graph View** — Interactive category/tag visualization
+- **Glassmorphism design** — Dark/light mode, responsive
+- **Static OG images** — Satori + Resvg, works on all platforms
+- **23+ languages** — Built-in i18n support
+- **Multi-author** — Co-author support with avatars
+- **MIT license** — Free and open source
 
-<img width="874" height="834" alt="SCR-20250824-kwmh" src="https://github.com/user-attachments/assets/7cd31b95-486d-4f79-ae5c-80ed6dfbc890" />
+---
 
-Based on [react-notion-x](https://github.com/NotionX/react-notion-x), you can use all of Notion's blocks.
+## 3. Notion Template Setup
 
-Learn more: https://noxionite.leapsignal.net/en/post/features-notion
+This project does **not** include a pre-built Notion template. You must create your own Notion workspace and database matching the schema below.
 
-## 2.2. Extremely fast routing with ISR
+### Required Properties
 
-![Project 2025-08-24 at 07 26 30](https://github.com/user-attachments/assets/31c2fe65-4fae-4208-9c24-c35d0906ebac)
+| Property | Notion Type | Required | Notes |
+|---|---|---|---|
+| **Title** | Title | ✅ | Page title |
+| **Slug** | Text | ✅ | URL-safe slug, e.g. `my-first-post` |
+| **Type** | Select | ✅ | Values: `Post`, `Category`, `Home`, `Database` |
+| **Public** | Checkbox | ✅ | Must be checked to publish |
 
-Pages are pre-rendered at build time and Notion pages are updated every 60 seconds, so page navigation takes less than 0.2 seconds.
+### Optional Properties
 
-## 2.3. Organize your posts with infinite folder-style categories
+| Property | Notion Type | Notes |
+|---|---|---|
+| **Language** | Select / Text | e.g. `en`, `ko`. Default from `site.locale.json` |
+| **Description** | Text | Meta description |
+| **Published** | Date | Publication date |
+| **Tags** | Multi-select | Array of tags |
+| **Authors** | Multi-select | Must match names in `site.config.ts` |
+| **Use Original Cover Image** | Checkbox | Skip OG overlay |
+| **Parent** | Relation | Parent page (breadcrumb) |
+| **Children** | Relation | Child pages |
+| **Cover Image** | Notion cover | Set via Notion page cover |
 
-<img width="310" height="525" alt="SCR-20250824-kwtw" src="https://github.com/user-attachments/assets/9a5d0d00-7a2d-4f81-a967-3ce7c8e47314" />
+### Example Entry
 
-You can organize your blog in a folder-like structure with endless categories.
+```
+Title: Hello World
+Slug: hello-world
+Type: Post
+Public: ✅
+Language: en
+Description: My first blog post
+Published: 2026-10-08
+Tags: [javascript, tutorial]
+Authors: [Jaewan Shin]
+```
 
-Learn more: https://noxionite.leapsignal.net/en/post/features-notion
+### Multi-language
 
-## 2.4. Automatic table of contents management
+Create separate entries per language with the same slug:
 
-<img width="2032" height="1191" alt="SCR-20250824-kwzo" src="https://github.com/user-attachments/assets/c011c569-8736-4348-8f1b-54e1fb6eb332" />
+| Title | Language | Slug |
+|---|---|---|
+| Hello World | en | hello-world |
+| 안녕하세요 | ko | hello-world |
 
-You can automatically manage the table of contents with Notion's headings.
+### Setup Steps
 
-## 2.5. Graph View
+1. Create a Notion workspace and a database
+2. Add all required properties (Title, Slug, Type, Public)
+3. Add optional properties as needed
+4. Get your `NOTION_TOKEN_V2` from browser cookies (Application → Cookies → `token_v2`)
+5. Set your database IDs in `site.config.ts` under `notionDbIds`
 
-![Project 2025-08-24 at 08 13 44](https://github.com/user-attachments/assets/b5beecdf-d6b6-42cd-916d-4b59ae36d599)
+> 📖 Full schema reference: [docs/ssot/contract/notion-content.md](docs/ssot/contract/notion-content.md)
 
-In 'Post View', you can see the entire hierarchical structure of categories and posts at a glance.
+---
 
-In 'Tag View', you can see the structure of tags at a glance by gathering tags that appear together in a post.
+## 4. Prerequisites
 
-## 2.6. Glassmorphism Design
+- Node.js 22.x
+- pnpm 10.x (or npm 9.x)
+- A Notion account with a published database
+- A Notion API token (`NOTION_TOKEN_V2`)
 
-https://github.com/user-attachments/assets/f56586a6-f34d-4f6c-9fe5-41c4a52da2cb
+---
 
-Beautiful glassmorphism design is applied to all pages, and it also supports dark/white mode.
+## 5. Quick Start
 
-<img width="643" height="1192" alt="SCR-20250824-hiig" src="https://github.com/user-attachments/assets/de5712e7-3e19-44a8-b829-206c7ad12642" />
+```bash
+# Clone the repository
+git clone https://github.com/ozuijoy/Notionsite.git
+cd Notionsite
 
-It is also responsive and works perfectly on mobile.
+# Install dependencies
+pnpm install
 
-## 2.7. Automatic social image generation
+# Configure environment
+cp .env.example .env.local
+# Edit .env.local → set NOTION_TOKEN_V2=your_token_v2_here
 
-![setup](https://github.com/user-attachments/assets/6a0f7a79-e91d-43bd-b5a6-c02860d1f07e)
+# Edit site.config.ts
+# - Update notionDbIds with your Notion database IDs
+# - Update name, domain, author
+# - Update socials
 
-Automatically creates and manages social images and og meta tags that are created when sharing on SNS.
+# Start development server
+pnpm dev
+```
 
-## 2.8. Support for 23 languages
+---
 
-It supports translation for 23 languages and you can build your blog in many more languages.
+## 6. Deployment
 
-<img width="5654" height="3605" alt="Flags (1)" src="https://github.com/user-attachments/assets/9f84df13-98a5-4c61-b6f0-6a00a1dd21a8" />
+### Platform Comparison
 
-## 2.9. Simultaneous work by multiple editors
+| | Cloudflare Pages | Vercel | Netlify |
+|---|---|---|---|
+| **Branch** | `main` | `vercel` | `netlify` |
+| **Config** | `wrangler.jsonc`, `open-next.config.ts` | `vercel.json` | `netlify.toml` |
+| **Build** | `pnpm run build:worker` | `pnpm run build` | `pnpm run build` |
+| **Output** | `.open-next/assets` | `.next` | `.next` |
+| **OG Images** | ✅ Satori + Resvg (build-time) | ✅ Satori + Resvg (build-time) | ✅ Satori + Resvg (build-time) |
+| **Free Tier** | Unlimited static | 100 GB | 100 GB |
+| **Status** | ✅ Supported & tested | ✅ Supported | ✅ Supported |
 
-Multiple people can work on a single blog at the same time and set them as co-authors.
+> **OG Images**: All platforms use build-time generation via [Satori](https://github.com/vercel/satori) + [Resvg](https://github.com/RazrFalcon/resvg.js). No Puppeteer or headless Chrome required — works on all serverless runtimes.
 
-## 2.10. Completely open source, free
+---
 
-It is completely open source and free to use under the MIT license.
+### 6.1 Cloudflare Pages (Recommended)
 
-# 3. Installation
+**Branch**: `main`
 
-Please check the link below for installation instructions.
+#### Option A: GitHub Integration (Recommended)
 
-[https://noxionite.leapsignal.net/en/post/setup](https://noxionite.leapsignal.net/post/setup)
+1. Push your code to GitHub (fork or your own repo)
+2. Create a Cloudflare Pages project:
+   - [Cloudflare Dashboard → Pages](https://dash.cloudflare.com/) → Create → Pages
+   - Connect your GitHub repository
+   - **Framework preset**: Next.js
+   - **Build command**: `pnpm install --frozen-lockfile && pnpm run build:worker`
+   - **Build output directory**: `.open-next/assets`
+   - **Environment variables**: `NOTION_TOKEN_V2=your_token_v2_here`
+3. Add your custom domain
+4. Every git push to `main` triggers a deploy
 
-[If the above link does not work, see this page.](https://alemem64.notion.site/Getting-Started-259f2d475c318068a84bfa73776fcda7)
+#### Option B: CLI Deploy
 
-# 4. License
+```bash
+pnpm install
+pnpm run build:worker
+pnpm deploy
+```
+
+---
+
+### 6.2 Vercel
+
+**Branch**: `vercel`
+
+```bash
+git checkout vercel
+git push origin vercel
+```
+
+Or via Vercel dashboard:
+
+1. [Vercel](https://vercel.com) → New Project → Import GitHub Repo
+2. Select your repo and the `vercel` branch
+3. Framework: Next.js (auto-detected)
+4. Build command: `pnpm run build`
+5. Output directory: `.next`
+6. Add env var: `NOTION_TOKEN_V2=your_token_v2_here`
+
+---
+
+### 6.3 Netlify
+
+**Branch**: `netlify`
+
+```bash
+git checkout netlify
+git push origin netlify
+```
+
+Or via Netlify dashboard:
+
+1. [Netlify](https://app.netlify.com) → Add new site → Import from Git
+2. Select your repo and the `netlify` branch
+3. Framework: Next.js (auto-detected)
+4. Build command: `pnpm run build`
+5. Publish directory: `.next`
+6. Add env var: `NOTION_TOKEN_V2=your_token_v2_here`
+
+---
+
+## 7. Static OG Images
+
+OG images are generated at build time using [Satori](https://github.com/vercel/satori) (SVG from JSX) + [Resvg](https://github.com/RazrFalcon/resvg.js) (SVG to PNG). No Puppeteer or headless Chrome needed.
+
+### How It Works
+
+1. `pnpm run build` compiles Next.js pages
+2. `postbuild` script (`scripts/generate-og-images.tsx`) reads generated HTML files
+3. Extracts `og:image` meta tags to identify which pages need images
+4. Renders each page's `SocialCard` component to SVG via Satori
+5. Converts SVG to PNG via Resvg (1200×630px)
+6. Outputs to `public/og-images/`
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `scripts/generate-og-images.tsx` | Build-time OG image generation (Satori + Resvg) |
+| `components/SocialCard.tsx` | React component for OG card layout |
+| `lib/get-social-image-url.ts` | Generates consistent OG image file paths |
+| `pages/api/generate-social-image.ts` | Legacy redirect (old URLs → static images) |
+
+---
+
+## 8. Configuration
+
+### site.config.ts
+
+Key settings:
+
+```typescript
+export default siteConfig({
+  notionDbIds: ['your-database-id-1', 'your-database-id-2'],
+  name: 'Your Blog Name',
+  domain: 'your-domain.com',
+  author: 'Your Name',
+  description: 'Your blog description',
+  locale: localeConfig,
+  isr: { revalidate: 3600 },  // ISR revalidation in seconds
+  // ... see site.config.ts for full options
+})
+```
+
+### .env.local
+
+```
+NOTION_TOKEN_V2=your_token_v2_here
+```
+
+---
+
+## 9. Project Structure
+
+```
+Notionsite/
+├── components/          # React components
+├── lib/                 # Core library (Notion API, site map, config)
+├── pages/               # Next.js pages (pages router)
+│   └── api/             # API routes (legacy OG redirect)
+├── scripts/             # Build scripts (OG image generation)
+├── styles/              # Global styles
+├── public/              # Static assets
+├── docs/                # Documentation
+├── site.config.ts       # Site configuration
+├── site.locale.json     # Locale configuration
+├── next.config.mjs      # Next.js configuration
+├── open-next.config.ts  # OpenNext (Cloudflare) config
+├── wrangler.jsonc       # Cloudflare Workers config
+├── vercel.json          # Vercel config (vercel branch)
+├── netlify.toml         # Netlify config (netlify branch)
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 10. Scripts
+
+| Script | Description |
+|---|---|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build + OG images |
+| `pnpm build:worker` | Build for Cloudflare Workers |
+| `pnpm preview:worker` | Preview Cloudflare build locally |
+| `pnpm deploy` | Deploy to Cloudflare (main branch) |
+| `pnpm analyze` | Bundle analysis |
+| `pnpm test` | Run lint + prettier checks |
+
+---
+
+## 11. License
 
 MIT © Jaewan Shin
 
-# 5. Known Issues
+---
 
-## 5.1. OG Tags are generated but not reflected on social platforms
-All tags are properly included in the `<head>` section, but social platforms fail to detect them.
+## 12. Known Issues
 
-## 5.2. Locale detection fails when accessing URLs with empty locale, redirecting to 404 page
+| Issue | Status | Notes |
+|---|---|---|
+| 5.1 OG tags not reflected on social platforms | ⚠️ | Tags in `<head>` but platforms fail to detect |
+| 5.2 Locale detection with empty locale → 404 | ⚠️ | URLs without locale prefix redirect to 404 |
+| 5.3 Partial Notion DB fetch via CategoryTree | ⚠️ | ISR caching related |
 
-## 5.3. Occasional issue where only partial Notion database is fetched when routing through CategoryTree
-This appears to be related to ISR caching.
+---
 
-## 5.4. Social images are not displayed on serverless platforms like Vercel
-This occurs because the system generates image files directly using Puppeteer, which requires a server environment.
+## 13. Branches
+
+| Branch | Platform | Status |
+|---|---|---|
+| `main` | Cloudflare Pages | ✅ Active, supported & tested |
+| `vercel` | Vercel | ✅ Active, community-maintained |
+| `netlify` | Netlify | ✅ Active, community-maintained |
+
+> Each branch has platform-specific config files and deployment instructions. Switch branches as needed.

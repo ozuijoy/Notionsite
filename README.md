@@ -84,7 +84,14 @@ Create separate entries per language with the same slug:
 1. Create a Notion workspace and a database
 2. Add all required properties (Title, Slug, Type, Public)
 3. Add optional properties as needed
-4. Get your `NOTION_TOKEN_V2` from browser cookies (Application → Cookies → `token_v2`)
+4. **取得 Notion API Token（NOTION_TOKEN_V2）**
+   - Notion 沒有「產生 API Token」的按鈕，你必須從瀏覽器手動複製
+   - 用瀏覽器登入 https://www.notion.so
+   - 按鍵盤上的 **F12** 鍵（Windows）或 **⌘ + ⌥ + I**（Mac）打開開發者工具
+   - 找到 **Application**（應用程式）分頁
+   - 點開左側的 **Cookies** → 點 **https://www.notion.so**
+   - 找到名為 **`token_v2`** 的那一列
+   - 把它的 **Value**（數值）全部複製起來（一長串字串）
 5. Set your database IDs in `site.config.ts` under `notionDbIds`
 
 > 📖 Full schema reference: [docs/ssot/contract/notion-content.md](docs/ssot/contract/notion-content.md)

@@ -2,7 +2,7 @@
   "name": "noxionite",
   "version": "1.0.0",
   "private": true,
-  "description": "Your Notion pages, reborn as a stunning blog",
+  "description": "Your Notion pages, reborn as a stunning blog — Vercel deployment branch",
   "author": "Jaewan Shin <alemem64@gmail.com>",
   "repository": "alemem64/noxionite",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "build": "next build",
     "postbuild": "tsx scripts/generate-og-images.tsx",
     "start": "next start -H 0.0.0.0",
-    "deploy": "opennextjs-cloudflare deploy",
     "deps:upgrade": "[ -z $GITHUB_ACTIONS ] && pnpm up -L notion-client notion-types notion-utils react-notion-x || echo 'Skipping deps:update on CI'",
     "deps:link": "[ -z $GITHUB_ACTIONS ] && run-s deps:link:* || echo 'Skipping deps:update on CI'",
     "deps:unlink": "[ -z $GITHUB_ACTIONS ] && pnpm add notion-client notion-types notion-utils react-notion-x || echo 'Skipping deps:update on CI'",
@@ -31,19 +30,15 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "test": "run-p test:*",
     "test:lint": "eslint .",
-    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check",
-    "build:worker": "opennextjs-cloudflare build",
-    "preview:worker": "opennextjs-cloudflare preview"
+    "test:prettier": "prettier '**/*.{js,jsx,ts,tsx}' --check"
   },
   "dependencies": {
     "@fisch0920/use-dark-mode": "^2.4.0",
     "@keyvhq/core": "^1.6.9",
     "@keyvhq/redis": "^1.6.10",
     "@react-icons/all-files": "^4.1.0",
-    "@sparticuz/chromium": "^123.0.1",
     "@types/react-transition-group": "^4.4.12",
     "@vercel/analytics": "^1.5.0",
-    "chrome-aws-lambda": "^10.1.0",
     "classnames": "^2.5.1",
     "expiry-map": "^2.0.0",
     "fathom-client": "^3.4.1",
@@ -81,7 +76,6 @@
     "@fontsource/noto-sans-kr": "^5.2.9",
     "@next/bundle-analyzer": "15.5.9",
     "@next/eslint-plugin-next": "15.5.9",
-    "@opennextjs/cloudflare": "^1.20.1",
     "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^22.15.30",
     "@types/prismjs": "^1.26.5",
@@ -93,12 +87,9 @@
     "eslint": "^9.28.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.5.3",
-    "puppeteer": "^24.16.0",
     "satori": "^0.26.0",
-    "serve-handler": "^6.1.6",
     "tsx": "^4.16.2",
-    "typescript": "^5.8.3",
-    "wrangler": "^4.110.0"
+    "typescript": "^5.8.3"
   },
   "overrides": {
     "cacheable-request": {

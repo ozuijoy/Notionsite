@@ -1,0 +1,201 @@
+/* Post List Styles */
+
+/* PostList Container */
+.postListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2.5rem;
+}
+
+/* PostCard Styles */
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: var(--default-bg-color);
+  border-color: var(--border-color);
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+}
+
+
+.cardLink:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px var(--shadow-color);
+  border-color: var(--hover-border-color);
+}
+
+.cardArticle {
+  display: flex;
+  width: 100%;
+  min-height: 140px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.cardCoverImage {
+  width: 260px;
+  height: auto;
+  order: 2;
+  align-self: stretch;
+  background-color: var(--bg-color-1);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 16px 16px 0;
+}
+
+.cardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  order: 1;
+  padding: 1.5rem 2rem;
+  min-width: 0;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cardDate {
+  font-size: 0.85rem;
+  color: var(--tertiary-text-color);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.cardDescription {
+  font-size: 0.95rem;
+  color: var(--secondary-text-color);
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-clamp: 4;
+}
+
+/* PostList Header Styles */
+.postListHeader {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--secondary-bg-color);
+  padding-bottom: 2rem;
+}
+
+.postListTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-text-color);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.postListDescription {
+  font-size: 1.1rem;
+  color: var(--secondary-text-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.postListCount {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+}
+
+/* PostList Empty State */
+.postListEmpty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary-text-color);
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.postListEmptyMessage {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.postListEmptyDescription {
+  font-size: 0.9rem;
+}
+
+/* PostList Pagination */
+.postListPagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.paginationEllipsis {
+  padding: 0 0.25rem;
+  color: var(--tertiary-text-color);
+}
+
+.paginationButton {
+  padding: 8px 12px;
+  border: 1px solid;
+  border-color: var(--border-color);
+  border-radius: 9999px;
+  background-color: transparent;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  line-height: 1;
+}
+
+.paginationButton:hover {
+  background-color: var(--hover-bg-color);
+  border-color: var(--hover-border-color);
+}
+
+.paginationButton.active {
+  border-color: var(--primary-highlight-color);
+  background-color: var(--primary-highlight-color);
+  color: var(--primary-text-color);
+  font-weight: 600;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .cardArticle {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .cardCoverImage {
+    width: 100%;
+    height: 200px;
+    order: 1;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .cardContent {
+    order: 2;
+    padding: 1.5rem 1rem;
+  }
+}

@@ -1,0 +1,214 @@
+.graphContainer {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  overflow: hidden;
+  background-color: var(--default-bg-color);
+  box-shadow: 0 0 32px 0 var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.graphInner {
+  width: 100%;
+  height: 100%;
+}
+
+.graphCanvasWrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.homeView {
+  height: 75vh;
+}
+
+.sideNavView {
+  height: 300px;
+  width: 100%;
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button {
+  background: var(--default-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--primary-text-color);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button:disabled,
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.button:disabled:hover,
+.button.disabled:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: none;
+  border-color: var(--border-color);
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--default-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+  backdrop-filter: blur(64px);
+  -webkit-backdrop-filter: blur(64px);
+}
+
+.modalContent {
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 32px;
+  border: 1px solid var(--hover-border-color);
+  background-color: var(--default-bg-color);
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.viewNavContainer {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+}
+
+.viewNav {
+  display: flex;
+  background: var(--default-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 9999px;
+  padding: 0.25rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  position: relative;
+}
+
+.viewNavItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--tertiary-text-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.viewNavItem:hover {
+  background: var(--hover-bg-color);
+  border: 1px solid var(--hover-border-color);
+}
+
+.viewNavItem.active {
+  background: var(--default-bg-color);
+  color: var(--primary-text-color);
+  border: 1px solid var(--border-color);
+}
+
+.viewNavIcon {
+  font-size: 1rem;
+}
+
+.modalGraphContainer {
+  flex: 1;
+  width: 100%;
+  min-height: 0; /* Important for flexbox children */
+  position: relative;
+  overflow: hidden;
+}
+
+.viewNavPill {
+  position: absolute;
+  background: var(--hover-bg-color);
+  border: 1px solid var(--hover-border-color);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+.tagViewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.tagViewPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--secondary-text-color);
+  gap: 1rem;
+}
+
+.tagViewIcon {
+  opacity: 0.5;
+}
+
+.tagViewPlaceholder h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-text-color);
+}
+
+.tagViewPlaceholder p {
+  margin: 0;
+  font-size: 0.875rem;
+  opacity: 0.7;
+}

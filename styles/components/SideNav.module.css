@@ -1,0 +1,107 @@
+.sideNav {
+  /* Keeping only non-conflicting styles */
+  overflow-y: auto;
+  z-index: 1003;
+  /* The rest is handled by glass-sidenav and mobile/desktop classes */
+}
+
+.categoryTreeContainer {
+  position: relative;
+}
+
+.graphContainer {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Desktop styles */
+.desktop {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  height: calc(100vh - 2rem);
+}
+
+/* Mobile styles */
+.mobile {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  height: calc(100vh - 150px);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1003;
+  /* The glass effect should be different on mobile. It shouldn't be rounded. */
+  /* Let's override the border-radius from glass-sidenav */
+  border-radius: 24px;
+}
+
+.mobileOpen {
+  transform: translateX(1rem);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--primary-text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.categoryItem {
+  margin-bottom: 10px;
+}
+
+.categoryLink {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: var(--primary-text-color);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.categoryLink:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.categoryLinkActive {
+  background-color: var(--primary-highlight-color);
+  color: var(--primary-text-color);
+}
+
+.subCategoryList {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+.subCategoryItem {
+  margin-bottom: 8px;
+}
+
+.subCategoryLink {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 4px;
+  color: var(--primary-text-color);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.subCategoryLink:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.subCategoryLinkActive {
+  background-color: var(--primary-highlight-color);
+  color: var(--primary-text-color);
+}

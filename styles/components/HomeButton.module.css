@@ -1,0 +1,40 @@
+/* styles/components/HomeButton.module.css */
+.homeButton {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  background-color: var(--default-bg-color);
+  box-shadow: 0 0 32px 0 var(--shadow-color);
+  transition: background-color 0.2s ease-in-out;
+  text-decoration: none;
+  padding: 16px;
+}
+
+.homeButton:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.icon {
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-text-color);
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 0.8rem;
+  color: var(--tertiary-text-color);
+  line-height: 1.3;
+}

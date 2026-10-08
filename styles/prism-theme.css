@@ -1,0 +1,186 @@
+/* prism theme adjustments */
+
+.notion .notion-inline-code {
+  color: #E45649;
+  background: var(--default-bg-color) !important;
+  border: 1px solid var(--border-color);
+  padding: 0.2em 0.4em !important;
+  border-radius: 4px;
+}
+
+.dark-mode .notion .notion-inline-code {
+  background: var(--hover-bg-color) !important;
+  border: 1px solid var(--border-color);
+  color: #D7BA7D;
+  padding: 0.2em 0.4em !important;
+  border-radius: 4px;
+}
+
+/**
+* Base Theme
+*/
+code[class*='language-'],
+pre[class*='language-'],
+.token.constant {
+  color: #383A42;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.important,
+.token.operator,
+.token.directive-hash {
+  color: #A626A4;
+}
+
+.token.builtin,
+.token.content {
+  color: #0384BC;
+}
+
+.token.boolean,
+.token.number {
+  color: #D19A66;
+}
+
+.token.class-name,
+.token.attr-name,
+.token.name,
+.token.selector {
+  color: #C18403;
+}
+
+.token.doctype,
+.token.tag,
+.token.property,
+.token.variable,
+.token.title,
+.token.deleted {
+  color: #E45649;
+}
+
+.token.string,
+.token.url,
+.token.attr-value,
+.token.inserted {
+  color: #50A150;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #A0A1A7;
+  font-style: italic;
+}
+
+.token.function {
+  color: #4078F2;
+}
+
+.token.punctuation {
+  color: #0631FA;
+}
+
+/**
+* Dark Mode Theme
+*/
+.dark-mode code[class*='language-'],
+.dark-mode pre[class*='language-'],
+.dark-mode .token.constant {
+  color: #c3c9d3;
+}
+
+.dark-mode .token.atrule,
+.dark-mode .token.attr-value,
+.dark-mode .token.keyword,
+.dark-mode .token.important,
+.dark-mode .token.operator,
+.dark-mode .token.directive-hash {
+  color: #C678DD;
+}
+
+.dark-mode .token.builtin,
+.dark-mode .token.content {
+  color: #56B6C2;
+}
+
+.dark-mode .token.boolean,
+.dark-mode .token.number {
+  color: #D19A66;
+}
+
+.dark-mode .token.class-name,
+.dark-mode .token.attr-name,
+.dark-mode .token.name,
+.dark-mode .token.selector {
+  color: #E5C07B;
+}
+
+.dark-mode .token.doctype,
+.dark-mode .token.tag,
+.dark-mode .token.property,
+.dark-mode .token.variable,
+.dark-mode .token.title,
+.dark-mode .token.deleted {
+  color: #E06C75;
+}
+
+
+
+.dark-mode .token.string,
+.dark-mode .token.url,
+.dark-mode .token.attr-value,
+.dark-mode .token.inserted {
+  color: #98C379;
+}
+
+
+.dark-mode .token.comment,
+.dark-mode .token.prolog,
+.dark-mode .token.cdata {
+  color: #5C6370;
+  font-style: italic;
+}
+
+
+.dark-mode .token.function {
+  color: #61AFEF;
+}
+
+
+.dark-mode .token.punctuation {
+  color: #FFD700;
+}
+
+
+
+/**
+* General overrides
+*/
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+  background: none;
+}
+
+pre[class*='language-'] > code {
+  border-left: 0 none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+pre[class*='language-']:before,
+pre[class*='language-']:after {
+  display: none !important;
+}

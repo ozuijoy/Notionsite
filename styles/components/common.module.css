@@ -1,0 +1,227 @@
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: var(--primary-text-color);
+}
+
+.page404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-text-color);
+  text-align: center;
+}
+
+.loadingIcon {
+  animation: spinner 0.6s linear infinite;
+  display: block;
+  width: 24px;
+  height: 24px;
+  color: rgba(55, 53, 47, 0.4);
+}
+
+.errorImage {
+  max-width: 100%;
+  width: 640px;
+}
+
+.contentWithSideNav {
+  margin-left: calc(var(--sidenav-width) + 32px);
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  color: var(--primary-text-color);
+  padding: 1rem 0;
+}
+
+/* This pseudo-element creates the full-width background */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--default-bg-color);
+  z-index: -1;
+  width: 100vw;
+  border-top: 1px solid var(--border-color);
+  left: calc(-1 * var(--main-content-margin-left, 0px));
+}
+
+.footerContent {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 80%;
+  padding: 0.5em;
+}
+
+.settings,
+.social {
+  user-select: none;
+}
+
+.settings a,
+.social a {
+  cursor: pointer;
+  font-size: 2em;
+  display: inline-flex;
+  padding: 0.25em;
+  margin-right: 1vw;
+  transition: color 250ms ease-out;
+}
+
+.settings a:last-of-type,
+.social a:last-of-type {
+  margin-right: 0;
+}
+
+.settings a:hover,
+.social a:hover {
+  transition: color 50ms ease-out;
+}
+
+.toggleDarkMode:hover {
+  color: #2795e9;
+}
+
+.twitter:hover {
+  color: #2795e9;
+}
+
+.mastodon:hover {
+  color: #5a4be1;
+}
+
+.zhihu:hover {
+  color: #0066ff;
+}
+
+.github:hover {
+  color: #c9510c;
+}
+
+.youtube:hover {
+  color: #ff0000;
+}
+
+.linkedin:hover {
+  color: #0077b5;
+}
+
+.newsletter:hover {
+  color: #777777;
+}
+
+.comments {
+  width: 100%;
+  margin-top: 2em;
+  border-top: 1px solid var(--fg-color-0);
+}
+
+@media only screen and (max-width: 566px) {
+  .footerContent > div > div:first-child {
+    flex-direction: column;
+  }
+
+  .footerContent > div > div:first-child > div {
+    margin-top: 1em;
+  }
+}
+
+.pageActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 6px 12px 12px;
+}
+
+.pageActions a {
+  cursor: pointer;
+  font-size: 24px;
+  display: inline-flex;
+  padding: 12px;
+  margin-right: 1vw;
+  border-radius: 50%;
+  background: transparent;
+  transition: all 250ms ease-out;
+}
+
+.pageActions a:last-of-type {
+  margin-right: 0;
+}
+
+.pageActions a:hover {
+  transition: all 50ms ease-out;
+}
+
+.likeTweet:hover {
+  background: #f6e3e8;
+  color: #e0265e;
+}
+
+.retweet:hover {
+  color: #19bf64;
+  background: #e5f2e8;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  color: var(--primary-text-color);
+  text-align: left;
+}
+
+.errorContent {
+  max-width: 600px;
+  width: 100%;
+  padding: 2rem;
+  text-align: left;
+}
+
+.errorTitle {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--primary-text-color);
+}
+
+.errorDescription {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: var(--primary-text-color);
+}
+
+.errorLink {
+  color: var(--primary-text-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.errorLink:hover {
+  opacity: 0.8;
+}

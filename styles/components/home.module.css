@@ -1,0 +1,394 @@
+.homeContainer {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center; /* Center children horizontally */
+}
+
+/* Hero Section */
+.heroContainer {
+  position: relative;
+  width: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - 88px - 2rem);
+  max-width: calc(100%); /* Default margin for desktop */
+  user-select: none; /* Disable text selection */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  transition: all 0.4s ease-in-out;
+}
+
+.heroProgressContainer {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 4px;
+  z-index: 3;
+}
+
+.heroProgressBar {
+  flex: 1;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.heroProgressIndicator {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  transform-origin: left;
+}
+
+.heroMediaWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.heroMediaItem {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.heroMediaItem.active {
+  opacity: 1;
+}
+
+.heroMedia {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroTopShadow {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200%;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+  filter: blur(2rem);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  color: white;
+  padding-right: 48px;
+  padding-bottom: 32px;
+  z-index: 2;
+}
+
+.heroTextContainer {
+    position: relative;
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.heroTextShadow {
+    position: absolute;
+    bottom: -15rem; 
+    right: -20rem;
+    width: 200%; 
+    height: 200%; 
+    background-color: rgba(0, 0, 0, 0.4);
+    filter: blur(5rem); 
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.heroTitle {
+  position: relative;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px var(--shadow-color);
+  z-index: 2;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+.heroDescription {
+  position: relative;
+  font-size: clamp(1rem, 2.5vw, 2rem);
+  margin: 0;
+  margin-left: auto;
+  text-shadow: 1px 1px 3px var(--shadow-color);
+  z-index: 2;
+  font-family: var(--font-noto-sans-kr), sans-serif;
+}
+
+.heroButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.8rem 1.6rem;
+  background-color:rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  transition: all 0.3s ease;
+  z-index: 20;
+  position: relative;
+  cursor: pointer;
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+}
+
+.heroTextContainer:hover .heroButton {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.homeNotionContainer {
+  position: relative;
+  padding-right: 32rem;
+}
+
+.mainContent {
+  width: 100%;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+}
+
+.heroContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Home Navigation */
+.homeNav {
+  position: relative; /* Reference for absolute positioning of child elements */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 32px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+}
+
+/* Added pill style */
+.navPill {
+  position: absolute;
+  background-color: var(--hover-bg-color);
+  border: 1px solid var(--hover-border-color);
+  border-radius: 64px;
+  transition: top 0.3s ease-in-out, left 0.3s ease-in-out, width 0.3s ease-in-out, height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  z-index: 0; /* Position behind text */
+}
+
+.navItem {
+  position: relative; /* Required for z-index to take effect */
+  z-index: 1; /* Position above pill */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--tertiary-text-color);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 64px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out; /* Keep color change */
+}
+
+/* Remove existing hover effect */
+/* .navItem:hover {
+  background-color: var(--hover-bg-color);
+  border: 1px solid var(--hover-border-color);
+} */
+
+.navItem.active {
+  color: var(--primary-text-color);
+  background-color: var(--default-bg-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Posts Grid */
+.postsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.postCard {
+  background: var(--bg-color, #ffffff);
+  border: 1px solid var(--border-color, #e5e5e5);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.postCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.postLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.postContent {
+  padding: 1.5rem;
+}
+
+.postTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--fg-color, #37352f);
+  line-height: 1.4;
+}
+
+.postExcerpt {
+  color: var(--fg-color-2, #787774);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--fg-color-3, #9b9a97);
+}
+
+.postDate {
+  font-weight: 500;
+}
+
+/* Categories Grid */
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.categoryCard {
+  display: block;
+  padding: 2rem;
+  background: var(--bg-color, #ffffff);
+  border: 1px solid var(--border-color, #e5e5e5);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.categoryCard:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.categoryName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--fg-color, #37352f);
+}
+
+.categoryDescription {
+  color: var(--fg-color-2, #787774);
+  line-height: 1.5;
+}
+
+/* Tags Container */
+.tagsContainer {
+  padding: 2rem;
+  text-align: center;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .heroContainer {
+    aspect-ratio: unset;
+    height: calc(100vh - 88px - 2.5rem); /* Full height minus TopNav and margin */
+    max-width: 100%;
+  }
+  
+  .heroOverlay {
+    padding: 1.5rem;
+  }
+
+  .heroTextShadow {
+    bottom: -10rem; 
+    right: -20rem;
+    width: 250%; 
+    height: 250%; 
+    filter: blur(3rem); 
+  }
+  .homeNotionContainer {
+    padding-right: 0;
+  }
+}
+
+.categoriesContainer {
+  width: 100%;
+  height: 75vh;
+  border-radius: 32px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+  touch-action: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.categoriesCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

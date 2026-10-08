@@ -1,0 +1,212 @@
+/* styles/components/SearchModal.module.css */
+
+.searchModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--default-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top */
+  padding: 10vh 2rem; /* Equal top/bottom padding for consistent margins at max-height */
+  z-index: 5000;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.searchModalContent {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 24px;
+  border: 1px solid var(--hover-border-color);
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1.5rem;
+  margin: 0; /* Remove margin, control spacing from overlay */
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark-mode .searchModalContent {
+  border-color: var(--hover-border-color);
+  background-color: var(--default-bg-color);
+}
+
+.searchInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.searchResultsCount {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-text-color);
+  border-bottom: 1px solid var(--hover-border-color);
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--secondary-text-color);
+  pointer-events: none; /* Make icon non-interactive */
+}
+
+.clearButton {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearButton:hover {
+  color: var(--primary-text-color);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 2.5rem; /* Adjusted padding for icons */
+  border-radius: 9999px;
+  border: 1px solid var(--hover-border-color);
+  background-color: var(--default-bg-color);
+  font-size: 1rem;
+  color: var(--primary-text-color);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.dark-mode .searchInput {
+  background-color: var(--default-bg-color);
+  border-color: var(--hover-border-color);
+  color: var(--primary-text-color);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--hover-border-color);
+}
+
+.searchResultsList {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.searchResultLink {
+  display: flex; /* Use flexbox for alignment */
+  align-items: flex-start;
+  gap: 0.5rem; /* Space between tag and title */
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border: 1px solid transparent;
+  color: var(--primary-text-color);
+  text-decoration: none;
+}
+
+.pageTypeTag {
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  flex-shrink: 0; /* Prevent tag from shrinking */
+}
+
+.pageTypeTagPost {
+  background-color: #4a90e2; /* Blue */
+}
+
+.pageTypeTagCategory {
+  background-color: #3cc66c; /* Teal */
+}
+
+.pageTypeTagHome {
+  background-color: #f5a623; /* Orange */
+}
+
+.pageTypeTagSubPage {
+  background-color: #7e859c; /* Gray */
+}
+
+.searchResultItem {
+  border-radius: 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.searchResultItem:last-child {
+  border-bottom: none;
+}
+
+.searchResultItem:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.dark-mode .searchResultItem {
+  border-bottom-color: var(--hover-border-color);
+}
+
+.dark-mode .searchResultItem:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.searchResultTitle {
+  font-weight: 600;
+  color: var(--primary-text-color);
+  margin-bottom: 0.25rem;
+}
+
+.dark-mode .searchResultTitle {
+  color: var(--primary-text-color);
+}
+
+.searchResultTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+  gap: 0.25rem;
+}
+
+.searchResultBreadcrumb {
+  font-size: 0.75rem;
+  color: var(--tertiary-text-color);
+  white-space: normal; /* Allow text to wrap */
+  word-break: break-word; /* Break long words if necessary */
+}
+
+.searchResultSnippet {
+  font-size: 0.9rem;
+  color: var(--secondary-text-color);
+}
+
+.dark-mode .searchResultSnippet {
+  color: var(--secondary-text-color);
+}
+
+.loadingSpinner, .searchMessage {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--secondary-text-color);
+}
+
+.dark-mode .searchMessage {
+  color: var(--secondary-text-color);
+}

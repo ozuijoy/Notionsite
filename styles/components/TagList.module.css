@@ -1,0 +1,14 @@
+.tagListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.noTags {
+  padding: 40px;
+  text-align: center;
+  color: var(--secondary-text-color);
+}

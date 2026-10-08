@@ -1,0 +1,889 @@
+/**
+ * This file contains site-specifc style overrides for Notion elements from
+ * react-notion-x.
+ *
+ * react-notion-x's goal is to match styling as close as possible to Notion,
+ * whereas our goal with this site is to adjust Notion's styling in a few key
+ * places to add some flare.
+ */
+
+/* :root {
+  --fg-color: var(--primary-text-color);
+}
+
+.dark-mode {
+  --fg-color: var(--primary-text-color);
+} */
+
+.notion {
+  --notion-max-width: 800px;
+  --notion-header-height: 54px;
+}
+
+
+.notion-page-content-inner {
+  padding: 1rem;
+  margin-top: -80px; /* Margin between PostHeader and the first block  */
+  margin-left: 2rem; 
+  max-width: 800px;
+}
+
+.mobile .notion-page-content-inner {
+  margin-left: 0;
+}
+
+
+.notion-frame {
+  padding: 0;
+  margin: 0;
+}
+
+
+.notion-page {
+  padding-bottom: calc(max(5vh, 32px)) !important;
+  line-height: 1.65;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.notion-page-content-has-aside {
+  width: calc(var(--notion-max-width) + 400px); /* Width of TOC */
+  display: flex;
+  flex-direction: row;
+}
+
+.notion-aside {
+  align-items: end;
+  max-height: 70vh; /* Maximum height: 70% of viewport height */
+  max-width: 320px;
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds max height */
+  position: sticky;
+  top: 120px; /* Fixed below PostHeader - can be adjusted as needed */
+  margin-top: -480px; /* Move up by PostHeader height to adjust sticky start point */
+  margin-left: 1rem; /* Move TOC to the right */
+}
+
+.notion-table-of-contents {
+  padding: 1rem;
+  border: 0.5px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+}
+
+.notion-table-of-contents-item {
+  padding: 0.5rem;
+  border-radius: 16px !important;
+}
+
+/* Home page TOC positioning - use data attribute selector */
+[data-is-home="true"] .notion-aside {
+  top: 200px;
+  margin-top: -180px;
+}
+
+/* Custom scrollbar for Table of Contents */
+.notion-aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notion-aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notion-aside::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.notion-aside::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Dark mode scrollbar */
+.dark-mode .notion-aside::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .notion-aside::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* Line break settings for TOC items - preserves click functionality */
+.notion-table-of-contents-item {
+  white-space: normal !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+}
+
+.notion-table-of-contents-item a {
+  white-space: normal !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  /* Remove display: block to preserve click functionality */
+}
+
+/* Hide TOC title "Table of Contents" */
+.notion-aside-table-of-contents-header {
+  display: none !important;
+}
+
+.notion-table-of-contents-active-item {
+  color: var(--primary-text-color) !important;
+}
+
+.index-page {
+  --notion-max-width: 900px;
+}
+
+.notion-tag {
+  background-color: var(--default-bg-color);
+  color: var(--primary-text-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.notion-text {
+  padding: 3px 2px;
+}
+
+.notion-asset-caption {
+  text-align: center;
+}
+
+.notion-asset-wrapper {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.notion-asset-wrapper img {
+  border-radius: 16px;
+}
+
+.notion-asset-wrapper-video > div,
+.notion-asset-wrapper-video video {
+  width: 100% !important;
+}
+
+.notion-header {
+  background: hsla(0, 0%, 100%, 0.8);
+  backdrop-filter: saturate(180%) blur(16px);
+}
+
+.dark-mode .notion-header {
+  background: transparent;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Workaround for Firefox not supporting backdrop-filter yet */
+@-moz-document url-prefix() {
+  .dark-mode .notion-header {
+    background: hsla(203, 8%, 20%, 0.8);
+  }
+}
+
+.notion-header .notion-nav-header {
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.notion-nav-header-rhs {
+  gap: 0.5rem;
+}
+
+.notion-gallery-grid {
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-gap: 6vmin;
+  gap: 6vmin;
+}
+
+.notion-gallery-grid .notion-page-icon-inline {
+  display: none;
+}
+
+.notion-gallery-grid .notion-page-title-text {
+  font-size: 2em;
+  white-space: unset;
+}
+
+.notion-gallery-grid .notion-collection-card-property {
+  white-space: unset;
+  text-overflow: unset;
+}
+
+.notion-gallery-grid .notion-property-text {
+  font-size: 14px;
+}
+
+.notion-collection-card {
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+.notion-collection-card-cover img {
+  border-radius: 16px;
+}
+
+.notion-collection-card {
+  overflow: visible;
+}
+
+.notion-collection-card-cover {
+  border-radius: 16px;
+  box-shadow: 2px 2px 8px 4px rgba(15, 15, 15, 0.1);
+}
+
+.notion-collection-card-cover {
+  border-bottom: 0 none;
+  transition: filter 150ms linear;
+  filter: none;
+}
+
+.notion-collection-card:hover .notion-collection-card-cover {
+  filter: brightness(120%);
+}
+
+.notion-collection-card-body {
+  padding: 10px;
+}
+
+
+/* only target safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media,
+  _:future,
+  :root,
+  .notion-collection-card-cover {
+    transition: none 0ms linear;
+  }
+}
+
+.notion-quote {
+  padding: 0.2em 0.75em;
+  line-height: 1.5;
+  font-size: 1.2em;
+  border-left: 4px solid var(--primary-text-color);
+}
+
+.notion-h1,
+.notion-h2,
+.notion-h3 {
+  margin-bottom: 0.25em;
+}
+
+.notion-callout {
+  margin: 0.5rem 0;
+  border-radius: 16px;
+}
+
+.notion-hr {
+  margin: 2em 0;
+}
+
+.notion-simple-table {
+  margin: 0.5rem 0;
+}
+
+/* 모바일: 화면보다 넓은 표는 페이지를 밀지 말고 열 안에서 줄바꿈/스크롤 (2026-07-14)
+   — 페이지 가로 스크롤이 생기면 fixed 배경(100vw)이 못 덮는 흰 영역이 노출된다.
+   PC는 기존 렌더링 유지를 위해 미디어쿼리 안에만 적용한다. */
+@media only screen and (max-width: 720px) {
+  .notion-page .notion-simple-table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+  /* Mobile/tablet breakpoint - apply 720px mechanism to all mobile sizes */
+ 
+  
+  .notion {
+    --notion-max-width: calc(100vw - 2rem);
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  
+  .notion {
+    --notion-max-width: calc(100vw - 2rem);
+    /* 모바일 폰트 소폭 축소 (2026-07-14) */
+    font-size: 15px;
+  }
+
+  .notion-page {
+    font-size: 15px;
+  }
+
+  .notion-h1 {
+    font-size: 1.6em;
+  }
+
+  .notion-h2 {
+    font-size: 1.35em;
+  }
+
+  .notion-h3 {
+    font-size: 1.15em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .notion-search-button {
+    display: none !important;
+  }
+}
+
+.notion .notion-page-icon-cover {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hide default notion title and cover since we use custom PostHeader */
+.notion-title {
+  display: none !important;
+}
+
+.notion-page-cover-wrapper {
+  display: none !important;
+}
+
+.notion-page-cover {
+  display: none !important;
+}
+
+/* Hide the entire page header section */
+.notion-page-header {
+  display: none !important;
+}
+
+/* Hide page icon if it exists */
+.notion-page-icon-hero {
+  display: none !important;
+}
+
+/* Remove top padding from notion content */
+.notion-page-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Remove top padding from notion scroller */
+.notion-page-scroller {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Simple and safe padding removal - doesn't interfere with TOC functionality */
+.custom-notion-page .notion-page-content {
+  padding-top: 0 !important;
+}
+
+.custom-notion-page .notion-page-scroller {
+  padding-top: 0 !important;
+}
+
+.notion-collection-row {
+  padding-bottom: 1em;
+}
+
+/* Hide all collection properties in page header */
+.notion-collection-page-properties {
+  display: none !important;
+}
+
+/* Alternative: Hide specific property types */
+.notion-collection-page-properties .notion-collection-row-property {
+  display: none !important;
+}
+
+.notion-collection-row-property .notion-property {
+  display: flex;
+  justify-content: center;
+}
+
+.notion-collection-row-value {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  min-height: 23px;
+}
+
+.notion-block-ab9a258d6cf444f3bb40dc2600feae91 .notion-page-link {
+  justify-content: center;
+  padding: 2em;
+}
+
+.notion-code {
+  background: var(--default-bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+}
+
+.notion-link {
+  color: var(--secondary-text-color);
+  border: none;
+  text-decoration: none;
+  padding: 0.1em 0.3em;
+  margin: -0.1em -0.3em;
+}
+
+.notion-
+
+.notion-link,
+.notion-page-link,
+.notion-collection-card,
+.notion-table-of-contents-item a,
+.notion-equation {
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  border-radius: 4px;
+}
+
+.notion-link:hover,
+.notion-page-link:hover,
+.notion-collection-card:hover,
+.notion-table-of-contents-item a:hover,
+.notion-equation:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.notion-link:focus,
+.notion-link:hover {
+  color: var(--primary-text-color);
+  text-decoration: none; /* Ensure no underline */
+  background-image: none; /* Remove default gradient */
+}
+
+.notion-red_background ,
+.notion-pink_background,
+.notion-blue_background,
+.notion-purple_background,
+.notion-teal_background,
+.notion-yellow_background,
+.notion-orange_background,
+.notion-brown_background,
+.notion-gray_background,
+.notion-default_background {
+  padding: 0 0.5rem;
+  margin: 0 0.125rem;
+}
+
+span.notion-gray_background,
+span.notion-brown_background,
+span.notion-orange_background,
+span.notion-yellow_background,
+span.notion-teal_background,
+span.notion-blue_background,
+span.notion-purple_background,
+span.notion-pink_background,
+span.notion-red_background,
+span.notion-default_background {
+  border-radius: 4px;
+}
+
+.notion-default {
+  color: var(--primary-text-color);
+}
+
+.notion-default_background,
+.notion-default_co,
+.notion-callout.notion-default_background_co {
+  background-color: var(--default-bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.notion-red_background,
+.notion-callout.notion-red_background_co {
+  background-color: rgba(227, 25, 25, 0.2);
+  border: 1px solid rgba(227, 25, 25, 0.5);
+}
+.notion-pink_background,
+.notion-callout.notion-pink_background_co {
+  background-color: rgba(218, 23, 147, 0.2);
+  border: 1px solid rgba(218, 23, 147, 0.5);
+}
+
+.notion-purple_background,
+.notion-callout.notion-purple_background_co {
+  background-color: rgba(155, 51, 234, 0.2);
+  border: 1px solid rgba(155, 51, 234, 0.5);
+}
+
+.notion-blue_background,
+.notion-callout.notion-blue_background_co {
+  background-color: rgba(65, 118, 231, 0.2);
+  border: 1px solid rgba(65, 118, 231, 0.5);
+}
+
+.notion-teal_background,
+.notion-callout.notion-teal_background_co {
+  background-color: rgba(37, 206, 63, 0.2);
+  border: 1px solid rgba(0, 139, 21, 0.5);
+}
+
+.notion-yellow_background,
+.notion-callout.notion-yellow_background_co {
+  background-color: rgba(255, 217, 25, 0.2);
+  border: 1px solid rgba(158, 141, 56, 0.5);
+}
+
+.notion-orange_background,
+.notion-callout.notion-orange_background_co {
+  background-color: rgba(255, 136, 0, 0.2);
+  border: 1px solid rgba(152, 98, 15, 0.5);
+}
+
+.notion-brown_background,
+.notion-callout.notion-brown_background_co {
+  background-color: rgba(140, 46, 0, 0.2);
+  border: 1px solid rgba(140, 46, 0, 0.5);
+}
+
+.notion-gray_background,
+.notion-callout.notion-gray_background_co {
+  background-color: rgba(155, 154, 151, 0.4);
+  border: 1px solid rgba(155, 154, 151, 0.5);
+}
+
+.dark-mode .notion-red_background,
+.dark-mode .notion-callout.notion-red_background_co {
+  background-color: rgba(255, 48, 48, 0.2);
+  border: 1px solid rgba(255, 48, 48, 0.5);
+}
+
+.dark-mode .notion-pink_background,
+.dark-mode .notion-callout.notion-pink_background_co {
+  background-color: rgba(255, 49, 179, 0.2);
+  border: 1px solid rgba(255, 49, 179, 0.5);
+}
+
+.dark-mode .notion-purple_background,
+.dark-mode .notion-callout.notion-purple_background_co {
+  background-color: rgba(177, 75, 255, 0.2);
+  border: 1px solid rgba(177, 75, 255, 0.5);
+}
+
+.dark-mode .notion-blue_background,
+.dark-mode .notion-callout.notion-blue_background_co {
+  background-color: rgba(77, 134, 255, 0.2);
+  border: 1px solid rgba(77, 134, 255, 0.5);
+}
+
+
+.dark-mode .notion-teal_background,
+.dark-mode .notion-callout.notion-teal_background_co {
+  background-color: rgba(80, 235, 103, 0.2);
+  border: 1px solid rgba(80, 235, 103, 0.5);
+}
+
+.dark-mode .notion-yellow_background,
+.dark-mode .notion-callout.notion-yellow_background_co {
+  background-color: rgba(255, 222, 58, 0.2);
+  border: 1px solid rgba(255, 222, 58, 0.5);
+}
+
+.dark-mode .notion-orange_background,
+.dark-mode .notion-callout.notion-orange_background_co {
+  background-color: rgba(255, 136, 0, 0.2);
+  border: 1px solid rgba(255, 136, 0, 0.5);
+}
+
+.dark-mode .notion-brown_background,
+.dark-mode .notion-callout.notion-brown_background_co {
+  background-color: rgba(140, 46, 0, 0.2);
+  border: 1px solid rgba(140, 46, 0, 0.5);
+}
+
+.dark-mode .notion-gray_background,
+.dark-mode .notion-callout.notion-gray_background_co {
+  background: rgba(155, 154, 151, 0.2);
+  border: 1px solid rgba(155, 154, 151, 0.5);
+}
+
+/* disable highlighting in dark mode */
+.dark-mode .notion-block-260baa77f1e1428b97fb14ac99c7c385 {
+  display: none;
+}
+
+.notion-red {
+  color: rgb(219, 66, 66);
+}
+.notion-pink {
+  color: rgb(255, 29, 172)
+}
+.notion-blue {
+  color: rgb(77, 134, 255);
+}
+.notion-purple {
+  color: rgb(155, 51, 234);
+}
+.notion-teal {
+  color: rgb(0, 163, 25);
+}
+.notion-yellow {
+  color: rgb(224, 187, 0);
+}
+.notion-orange {
+  color: rgb(255, 136, 0);
+}
+.notion-brown {
+  color: rgb(140, 46, 0);
+}
+.notion-gray {
+  color: rgb(64, 64, 64);
+}
+
+.dark-mode .notion-red {
+  color: rgb(248, 91, 91);
+}
+.dark-mode .notion-pink {
+  color: rgb(255, 63, 185);
+}
+.dark-mode .notion-blue {
+  color: rgb(77, 134, 255);
+}
+.dark-mode .notion-purple {
+  color: rgb(181, 84, 255);
+}
+.dark-mode .notion-teal {
+  color: rgb(0, 163, 25);
+}
+.dark-mode .notion-yellow {
+  color: rgb(224, 187, 0);
+}
+.dark-mode .notion-orange {
+  color: rgb(255, 136, 0);
+}
+.dark-mode .notion-brown {
+  color: rgb(221, 110, 55);
+}
+.dark-mode .notion-gray {
+  color: rgb(151, 154, 155);
+}
+
+/* Custom styles for tweet embeds */
+.react-tweet-theme {
+  --tweet-container-margin: 1.5rem 0;
+}
+
+.notion-tweet {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.notion-pdf-outline-button {
+  background: transparent;
+}
+
+.notion-asset-object-fit {
+  object-fit: cover;
+}
+
+.notion-app.dark-mode {
+  --bg-color: rgba(26, 26, 26, 0.0) !important;
+}
+
+.notion-code {
+  border-radius: 12px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-color);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.5em !important;
+}
+
+
+.notion-callout-text {
+  overflow-x: auto;
+}
+
+.notion-code-copy-button {
+  background-color: var(--button-bg-color);
+  box-shadow: none !important;
+  color: var(--secondary-text-color);
+  border-radius: 12px;
+}
+
+.notion-code-copy-button:hover {
+  background-color: var(--hover-bg-color);
+  color: var(--primary-text-color);
+}
+
+
+.notion-file-icon path {
+  fill: var(--primary-text-color);
+}
+
+.notion-simple-table {
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-color);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.notion-simple-table td {
+  border-color: var(--border-color);
+}
+
+.notion-simple-table-header-row td {
+  background-color: var(--default-bg-color);
+}
+
+.notion-simple-table-header-cell {
+  background-color: var(--default-bg-color);
+}
+
+/* 
+  Override react-notion-x's default behavior. 
+  The library hides the TOC at 1300px, but we want it visible down to 1200px.
+*/
+@media (min-width: 1200px) and (max-width: 1300px) {
+  .notion-aside {
+    display: flex !important; /* Force display between 1200px and 1300px */
+  }
+}
+
+
+.notion-hr {
+  border-color: var(--secondary-bg-color);
+}
+
+.notion-google-drive-link {
+  border-radius: 12px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-color);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.notion-google-drive-body {
+ border-color: var(--border-color); 
+}
+
+.notion-google-drive-link:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.notion-external {
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-color);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.notion-external-image {
+  margin: 0.5rem 1.2rem 0.5rem 0.5rem;
+}
+
+.notion-external:hover {
+  background-color: var(--hover-bg-color);
+}
+
+.notion-external-title {
+  color: var(--primary-text-color);
+}
+
+.notion-external-description,
+.notion-external-block-desc {
+  color: var(--secondary-text-color);
+}
+
+
+/*
+  --- Custom Default Background Styles ---
+*/
+
+
+.notion-bookmark {
+  border-radius: 12px;
+  background-color: var(--default-bg-color);
+  backdrop-filter: blur(10px);
+  border-color: var(--border-color);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+
+/*
+  --- Custom Link & Hover/Focus Styles ---
+  This section replaces all previous custom styles for
+  .notion-link, .notion-page-link, and .notion-collection-card.
+*/
+
+/* 1. Base styles for hyperlinks */
+.notion-link {
+  color: var(--secondary-text-color);
+  border: none;
+  text-decoration: none;
+  padding: 0.1em 0.3em;
+  margin: -0.1em -0.3em;
+}
+
+/* 2. Base styles for all elements with hover/focus effects (transition, border-radius) */
+.notion-link,
+.notion-page-link,
+.notion-collection-card,
+a.notion-table-of-contents-item,
+.notion-file,
+.notion-equation {
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+  border-radius: 4px;
+}
+
+/* 3. Apply hover/focus background to all targeted elements */
+.notion-link:hover,
+.notion-link:focus,
+.notion-page-link:hover,
+.notion-page-link:focus,
+.notion-collection-card:hover,
+.notion-collection-card:focus-within,
+a.notion-table-of-contents-item:hover,
+a.notion-table-of-contents-item:focus,
+.notion-bookmark:hover,
+.notion-file:hover,
+.notion-file-link:hover,
+.notion-equation:hover {
+  background-color: var(--hover-bg-color);
+  outline: none; /* Remove default focus outline since we have a background */
+}
+
+/* 4. Specific text color change on hyperlink hover/focus */
+.notion-link:hover {
+  color: var(--primary-text-color);
+  text-decoration: none; /* Ensure no underline */
+  background-image: none; /* Remove default gradient */
+}
+
+/* 5. Keep collection card cover brightness effect */
+.notion-collection-card:hover .notion-collection-card-cover {
+  filter: brightness(120%);
+}
+
+/* 6. Set default text color for TOC items */
+a.notion-table-of-contents-item {
+  color: var(--primary-text-color);
+}
+
+
+.notion-equation:focus,
+.notion-equation:focus-within,
+.notion-equation-inline:focus,
+.notion-equation-inline:focus-within {
+  background-color: transparent;
+}
+

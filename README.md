@@ -35,26 +35,32 @@ This project does **not** include a pre-built Notion template. You must create y
 
 ### Required Properties
 
-| Property | Notion Type | Required | Notes |
-|---|---|---|---|
-| **Title** | Title | ✅ | Page title |
-| **Slug** | Text | ✅ | URL-safe slug, e.g. `my-first-post` |
-| **Type** | Select | ✅ | Values: `Post`, `Category`, `Home`, `Database` |
-| **Public** | Checkbox | ✅ | Must be checked to publish |
+Click **+ Add a property** at the top of your database and add these four properties:
+
+| Property Name | Property Type | How to set in Notion |
+|---|---|---|
+| **Title** | Title | Default — this is the first column. Leave it as is. |
+| **Slug** | Text | Click **+**, type `Slug`, select **Text** |
+| **Type** | Select | Click **+**, type `Type`, select **Select**. Then click the Select pill → **Add option** and add: `Post`, `Category`, `Home`, `Database` |
+| **Public** | Checkbox | Click **+**, type `Public`, select **Checkbox** |
+
+💡 Your database should now have exactly 4 columns: `Title`, `Slug`, `Type`, `Public`.
 
 ### Optional Properties
 
-| Property | Notion Type | Notes |
+You can add these extra columns if you need them:
+
+| Property Name | Property Type | Notes |
 |---|---|---|
-| **Language** | Select / Text | e.g. `en`, `ko`. Default from `site.locale.json` |
-| **Description** | Text | Meta description |
+| **Language** | Select or Text | Add options like `en`, `ko`, or just type text |
+| **Description** | Text | Short description shown in meta tags |
 | **Published** | Date | Publication date |
-| **Tags** | Multi-select | Array of tags |
-| **Authors** | Multi-select | Must match names in `site.config.ts` |
-| **Use Original Cover Image** | Checkbox | Skip OG overlay |
-| **Parent** | Relation | Parent page (breadcrumb) |
-| **Children** | Relation | Child pages |
-| **Cover Image** | Notion cover | Set via Notion page cover |
+| **Tags** | Multi-select | Add options (e.g. `javascript`, `tutorial`) |
+| **Authors** | Multi-select | **Must match** author names in `site.config.ts` |
+| **Use Original Cover Image** | Checkbox | When checked, OG image uses raw cover without overlay |
+| **Parent** | Relation | Add option, then link to another page in **the same database** |
+| **Children** | Relation | Links back to pages whose Parent points to this one |
+| **Cover Image** | Page cover | Set via Notion's native page cover feature |
 
 ### Example Entry
 
@@ -82,16 +88,17 @@ Create separate entries per language with the same slug:
 ### Setup Steps
 
 1. Create a Notion workspace and a database
-2. Add all required properties (Title, Slug, Type, Public)
+2. Add all required properties (Title, Slug, Type, Public) — see exact types below
 3. Add optional properties as needed
-4. **取得 Notion API Token（NOTION_TOKEN_V2）**
-   - Notion 沒有「產生 API Token」的按鈕，你必須從瀏覽器手動複製
-   - 用瀏覽器登入 https://www.notion.so
-   - 按鍵盤上的 **F12** 鍵（Windows）或 **⌘ + ⌥ + I**（Mac）打開開發者工具
-   - 找到 **Application**（應用程式）分頁
-   - 點開左側的 **Cookies** → 點 **https://www.notion.so**
-   - 找到名為 **`token_v2`** 的那一列
-   - 把它的 **Value**（數值）全部複製起來（一長串字串）
+4. Get your `NOTION_TOKEN_V2` from your browser
+   - Notion does not have a button to create an API token — you must copy it manually
+   - Open https://www.notion.so and log in to your account
+   - Press **F12** (Windows) or **⌘ + ⌥ + I** (Mac) to open Developer Tools
+   - Go to the **Application** tab (Chrome) or **Storage** tab (Firefox)
+   - In the left sidebar, expand **Cookies**, click **https://www.notion.so**
+   - Find the row named **`token_v2`**
+   - Copy the entire **Value** (it is a long string of characters)
+   - Paste it into your `.env.local` file (see Prerequisites section)
 5. Set your database IDs in `site.config.ts` under `notionDbIds`
 
 > 📖 Full schema reference: [docs/ssot/contract/notion-content.md](docs/ssot/contract/notion-content.md)

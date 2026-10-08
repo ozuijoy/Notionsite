@@ -31,63 +31,105 @@ Noxionite is a powerful blog engine that turns your Notion posts into a personal
 
 ## 3. Notion Template Setup
 
-This project does **not** include a pre-built Notion template. You must create your own Notion workspace and database matching the schema below.
+Noxionite turns your Notion **database** into a blog. This project does **not** provide a pre-built Notion template, but the database structure is simple and documented below.
 
-### Required Properties
+### Step 1: Create the database in Notion
 
-| Property | Notion Type | Required | Notes |
+1. Open Notion and create a new page (e.g. name it "My Blog")
+2. Type `/database` and choose **Database → Table view**
+3. Rename the database (optional, e.g. "Blog Posts")
+
+### Step 2: Add the required properties
+
+Click **+ Add a property** at the top of the database and add these four properties in order:
+
+| Property Name | Property Type | How to set it in Notion |
+|---|---|---|
+| **Title** | Title | Default — this is the page title column. Leave as is. |
+| **Slug** | Text | Click the **+** → type `Slug` → select **Text**. |
+| **Type** | Select | Click the **+** → type `Type` → select **Select**. Click the **Select** pill → choose **Add option** and add these exact options: `Post`, `Category`, `Home`, `Database`. |
+| **Public** | Checkbox | Click the **+** → type `Public` → select **Checkbox**. |
+
+💡 The database now has exactly these 4 columns: `Title` (default), `Slug`, `Type`, `Public`.
+
+### Step 3: Add optional properties
+
+| Property Name | Property Type | Notes |
+|---|---|---|
+| **Language** | Select or Text | Add options like `en`, `ko`. Or simply type text. |
+| **Description** | Text | Short description shown in meta tags. |
+| **Published** | Date | Your blog post's publication date. |
+| **Tags** | Multi-select | Add options (e.g. `javascript`, `tutorial`). |
+| **Authors** | Multi-select | Author names — **must match** the `name` in `site.config.ts` `authors`. |
+| **Use Original Cover Image** | Checkbox | When checked, the OG image uses the raw page cover. |
+| **Parent** | Relation | Add option, then link to another page in **the same database**. |
+| **Children** | Relation | Links back to pages whose Parent points to this one. |
+| **Cover Image** | (Notion cover) | Set by clicking the cover area at the top of a page. |
+
+### Step 4: Create your first post
+
+Add a new row (click the `+ Add a page` row) with values like:
+
+| Title | Slug | Type | Public | Language | Description | Published | Tags |
+|---|---|---|---|---|---|---|---|
+| Hello World | hello-world | Post | ✅ | en | My first blog post | 2026-10-08 | javascript, tutorial |
+
+### Step 5: Publish a category
+
+Add a row with:
+
+| Title | Slug | Type | Public |
 |---|---|---|---|
-| **Title** | Title | ✅ | Page title |
-| **Slug** | Text | ✅ | URL-safe slug, e.g. `my-first-post` |
-| **Type** | Select | ✅ | Values: `Post`, `Category`, `Home`, `Database` |
-| **Public** | Checkbox | ✅ | Must be checked to publish |
+| Tutorial | tutorial | Category | ✅ |
 
-### Optional Properties
+And link posts to it via the **Parent** relation.
 
-| Property | Notion Type | Notes |
-|---|---|---|
-| **Language** | Select / Text | e.g. `en`, `ko`. Default from `site.locale.json` |
-| **Description** | Text | Meta description |
-| **Published** | Date | Publication date |
-| **Tags** | Multi-select | Array of tags |
-| **Authors** | Multi-select | Must match names in `site.config.ts` |
-| **Use Original Cover Image** | Checkbox | Skip OG overlay |
-| **Parent** | Relation | Parent page (breadcrumb) |
-| **Children** | Relation | Child pages |
-| **Cover Image** | Notion cover | Set via Notion page cover |
+### Multi-language posts
 
-### Example Entry
+To publish the same post in multiple languages, add a separate row with the **same Slug** but a different **Language**:
 
+| Title | Slug | Language | Type | Public |
+|---|---|---|---|---|
+| Hello World | hello-world | en | Post | ✅ |
+| 안녕하세요 | hello-world | ko | Post | ✅ |
+
+They will appear at `/en/post/hello-world` and `/ko/post/hello-world`.
+
+### Step 6: Get the Notion API token (`NOTION_TOKEN_V2`)
+
+Noxionite needs a Notion API token to read your database. Notion doesn't have a "create API token" button, so you extract it from your browser:
+
+1. Open [https://www.notion.so](https://www.notion.so) and **log in**
+2. Press **F12** (Windows/Linux) or **⌘+⌥+I** (Mac) to open Dev Tools
+3. In the Dev Tools panel, go to **Application** tab (Chrome) or **Storage** tab (Firefox)
+4. Expand **Cookies** → click **https://www.notion.so**
+5. Find the cookie named `token_v2` in the list
+6. Double-click its **Value** cell and **copy the entire value** (it's a long string)
+
+Then add it to your `.env.local`:
+
+```bash
+cp .env.example .env.local
+echo "NOTION_TOKEN_V2=your_token_v2_here" >> .env.local
 ```
-Title: Hello World
-Slug: hello-world
-Type: Post
-Public: ✅
-Language: en
-Description: My first blog post
-Published: 2026-10-08
-Tags: [javascript, tutorial]
-Authors: [Jaewan Shin]
+
+### Step 7: Get your database ID and configure the site
+
+1. In your Notion database, click the three dots `•••` → **Get link to block**
+2. In the URL you get (e.g. `https://www.notion.so/xyz?v=abc#1234567890abcdef1234567890abcdef`), the database ID is the long hex string (`1234567890abcdef...`)
+3. Open `site.config.ts` and edit:
+
+```typescript
+export default siteConfig({
+  notionDbIds: ['YOUR_DATABASE_ID'],
+  name: 'Your Blog Name',
+  domain: 'your-domain.com',
+  author: 'Your Name',
+  ...
+})
 ```
 
-### Multi-language
-
-Create separate entries per language with the same slug:
-
-| Title | Language | Slug |
-|---|---|---|
-| Hello World | en | hello-world |
-| 안녕하세요 | ko | hello-world |
-
-### Setup Steps
-
-1. Create a Notion workspace and a database
-2. Add all required properties (Title, Slug, Type, Public)
-3. Add optional properties as needed
-4. Get your `NOTION_TOKEN_V2` from browser cookies (Application → Cookies → `token_v2`)
-5. Set your database IDs in `site.config.ts` under `notionDbIds`
-
-> 📖 Full schema reference: [docs/ssot/contract/notion-content.md](docs/ssot/contract/notion-content.md)
+> 📖 Full field-by-field reference: [docs/ssot/contract/notion-content.md](docs/ssot/contract/notion-content.md)
 
 ---
 
